@@ -18,15 +18,20 @@ function Nave:update(dt)
 
     for i, tiro in pairs(self.listaDeTiros) do 
         tiro:update(dt)
+
+        if tiro:saiuDaTela() then
+            table.remove(self.listaDeTiros, i)
+        end
     end
 end
 
 function Nave:draw()
-    love.graphics.draw(self.imagem, self.x, self.y, 0, 0.3, 0.3)
-
     for i, tiro in pairs(self.listaDeTiros) do 
         tiro:draw()
     end
+
+    love.graphics.draw(self.imagem, self.x, self.y, 0, 0.3, 0.3)
+    
 end
 
 function Nave:mover(dt)

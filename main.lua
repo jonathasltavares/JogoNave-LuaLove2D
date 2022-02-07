@@ -6,6 +6,7 @@ function love.load()
     require "jogo"
     require "nave"
     require "tiro"
+    require "inimigo"
 
     jogo = Jogo()
 end
