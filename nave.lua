@@ -1,20 +1,32 @@
 Nave = Classe:extend()
 
 function Nave:new()
+    self.imagem = love.graphics.newImage("Recursos/Imagem/spaceship.png")
     self.x, self.y = 400, 300
-    self.largura =  50
-    self.altura = 50
-    self.velocidade = 200
+    self.largura =  500*0.3
+    self.altura = 500*0.2
+    self.velocidade = 500
+    self.listaDeTiros = {}
 end
 
 function Nave:update(dt)
     self:mover(dt)
     self:manterNaTela()
+    if love.keyboard.isDown("space") then
+        self:atirar(dt)
+    end
 
+    for i, tiro in pairs(self.listaDeTiros) do 
+        tiro:update(dt)
+    end
 end
 
 function Nave:draw()
-    love.graphics.rectangle("fill", self.x, self.y, self.largura, self.altura)
+    love.graphics.draw(self.imagem, self.x, self.y, 0, 0.3, 0.3)
+
+    for i, tiro in pairs(self.listaDeTiros) do 
+        tiro:draw()
+    end
 end
 
 function Nave:mover(dt)
@@ -45,4 +57,9 @@ function Nave:manterNaTela()
     
     end
     
+end
+
+function Nave:atirar(dt)
+    tiro = Tiro(self.x + self.largura/2.0  , self.y + self.altura/2.1)
+    table.insert(self.listaDeTiros, tiro)
 end

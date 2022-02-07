@@ -5,7 +5,7 @@ function love.load()
     Classe = require "classic"
     require "jogo"
     require "nave"
-
+    require "tiro"
 
     jogo = Jogo()
 end
